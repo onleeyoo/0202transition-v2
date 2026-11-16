@@ -1,0 +1,122 @@
+/* 0202Transition 타자기(테스트중) — scoped copy of the Korean Typewriter panel style */
+.twRoot .hidden { display: none !important; }
+.twRoot .btn { cursor: pointer; }
+.twRoot .btn.off { opacity: .35; cursor: default; }
+.twRoot .reload { flex: none; width: 22px; height: 20px; line-height: 20px; margin-left: 8px; text-align: center; border-radius: 6px; background-color: #232323; color: #a3a3a3; font-size: 13px; }
+.twRoot .reload:hover { color: #fff; }
+.twRoot .tip { position: relative; display: flex; flex-direction: row; align-items: flex-start; background-color: #232323; border: 1px solid #3f3f3f; border-radius: 9px; padding: 9px 26px 9px 10px; color: #a3a3a3; margin-bottom: 12px; }
+.twRoot .tip .ic { flex: none; width: 16px; height: 16px; border: 1px solid #a3a3a3; border-radius: 8px; font-size: 10px; line-height: 14px; text-align: center; font-style: italic; margin-right: 8px; }
+.twRoot .tip b { color: #e6e6e6; }
+.twRoot .tipX { position: absolute; top: 5px; right: 6px; width: 18px; height: 18px; border-radius: 5px; color: #a3a3a3; font-size: 14px; line-height: 16px; text-align: center; }
+.twRoot .tipX:hover { background-color: #3f3f3f; color: #fff; }
+.twRoot .tipOff { display: none !important; }
+.twRoot .helpBody { flex: 1; display: flex; flex-direction: column; }
+.twRoot .helpHead { display: flex; flex-direction: row; align-items: baseline; margin-bottom: 4px; }
+.twRoot .helpTitle { color: #e6e6e6; font-size: 12px; margin-right: 6px; }
+.twRoot .helpNum { font-size: 10px; color: #a3a3a3; }
+.twRoot .hs { display: none; min-height: 32px; }
+.twRoot .hs.on { display: block; }
+.twRoot .helpNav { display: flex; flex-direction: row; align-items: center; margin-top: 6px; }
+.twRoot .helpNav .sp { flex: 1; }
+.twRoot .hb { padding: 3px 9px; border-radius: 6px; border: 1px solid #3f3f3f; color: #a3a3a3; font-size: 11px; margin-left: 6px; }
+.twRoot .hb:first-child { margin-left: 0; }
+.twRoot .hb:hover { color: #fff; border-color: #4b9cff; }
+.twRoot .hb.pri { background-color: #4b9cff; border-color: #4b9cff; color: #fff; }
+.twRoot .bigs { display: flex; flex-direction: row; margin-bottom: 10px; }
+.twRoot .big { flex: 1; min-height: 50px; border-radius: 9px; background-color: #2e2e2e; border: 1px solid #3f3f3f; padding: 7px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.twRoot .big + .big { margin-left: 8px; }
+.twRoot .big b { font-size: 13px; font-weight: 700; }
+.twRoot .big small { font-size: 10px; color: #a3a3a3; }
+.twRoot .big:hover { border-color: #4b9cff; }
+.twRoot .big.primary { background-color: #5b5e63; border-color: #5b5e63; }
+.twRoot .big.primary:hover { background-color: #6a6d72; }
+.twRoot .big.busy { opacity: .5; }
+.twRoot .big.dim { opacity: .55; }
+.twRoot .card { background-color: #232323; border: 1px solid #3f3f3f; border-radius: 10px; padding: 10px; margin-bottom: 10px; }
+.twRoot .row { display: flex; flex-direction: row; align-items: center; min-height: 28px; }
+.twRoot .lbl { width: 58px; flex-shrink: 0; color: #a3a3a3; }
+.twRoot .seg { display: flex; flex-direction: row; background-color: #1d1d1d; border-radius: 7px; padding: 2px; flex: 1; }
+.twRoot .sb { flex: 1; padding: 4px 6px; border-radius: 5px; color: #a3a3a3; text-align: center; }
+.twRoot .sb.on { background-color: #444444; color: #fff; font-weight: 600; }
+.twRoot .num { width: 46px; margin-left: 6px; }
+.twRoot .unit { color: #a3a3a3; margin-left: 3px; }
+.twRoot .hint { color: #a3a3a3; font-size: 11px; margin-top: 4px; padding-left: 58px; }
+.twRoot .ftitle { font-weight: 700; font-size: 13px; margin-bottom: 8px; }
+.twRoot .fl { display: block; color: #a3a3a3; margin: 6px 0 4px; }
+.twRoot .form textarea, .twRoot .form input { width: 100%; font-size: 13px; }
+.twRoot .form textarea { min-height: 48px; }
+.twRoot .alignSeg { flex: none; width: 180px; }
+.twRoot .frow { display: flex; flex-direction: row; }
+.twRoot .fcol { flex: 1; min-width: 0; }
+.twRoot .fcol + .fcol { margin-left: 8px; }
+.twRoot .fcol.s { flex: none; width: 64px; }
+.twRoot .fcol.c { flex: none; width: 44px; }
+.twRoot .fontBox { position: relative; display: flex; flex-direction: row; align-items: center; }
+.twRoot .fontBox input { flex: 1; }
+.twRoot .fdrop { width: 26px; height: 28px; line-height: 28px; text-align: center; color: #a3a3a3; background-color: #1d1d1d; border: 1px solid #3f3f3f; border-radius: 6px; margin-left: 3px; }
+.twRoot .fdrop:hover { color: #fff; }
+.twRoot .fontList { position: absolute; top: 32px; left: 0; width: 240px; z-index: 20; background-color: #2a2a2a; border: 1px solid #3f3f3f; border-radius: 8px; max-height: 240px; overflow-y: auto; }
+.twRoot .fontList .fi { padding: 6px 9px; white-space: nowrap; overflow: hidden; cursor: pointer; }
+.twRoot .fontList .fi:hover { background-color: #444444; color: #fff; }
+.twRoot .fontList em { display: block; padding: 5px 9px 3px; font-style: normal; font-size: 10px; color: #a3a3a3; }
+.twRoot .fontList i { font-style: normal; color: #a3a3a3; font-size: 10px; margin-left: 4px; }
+.twRoot .fontList em.rescan { cursor: pointer; color: #4b9cff; padding: 7px 9px; border-top: 1px solid #3f3f3f; }
+.twRoot .colorBox { position: relative; }
+.twRoot #tw-colorBtn { width: 100%; height: 28px; border-radius: 7px; border: 1px solid #3f3f3f; background-color: #fff; }
+.twRoot .colorPop { position: absolute; right: 0; top: 32px; z-index: 30; width: 200px; background-color: #2a2a2a; border: 1px solid #3f3f3f; border-radius: 9px; padding: 8px; }
+.twRoot .sw { display: flex; flex-direction: row; flex-wrap: wrap; }
+.twRoot .swb { width: 18px; height: 18px; margin: 0 4px 4px 0; border-radius: 4px; border: 1px solid #555; cursor: pointer; }
+.twRoot .swb.on { border: 2px solid #4b9cff; }
+.twRoot .hexRow { display: flex; flex-direction: row; align-items: center; margin-top: 6px; color: #a3a3a3; }
+.twRoot .hexRow input { flex: 1; margin: 0 4px; }
+.twRoot .hexPrev { width: 22px; height: 22px; border-radius: 5px; border: 1px solid #3f3f3f; }
+.twRoot .factions { display: flex; flex-direction: row; justify-content: flex-end; margin-top: 12px; }
+.twRoot .factions .btn { border-radius: 7px; padding: 6px 14px; margin-left: 8px; }
+.twRoot .ghost { border: 1px solid #3f3f3f; color: #a3a3a3; }
+.twRoot .go { background-color: #4b9cff; color: #fff; font-weight: 700; }
+.twRoot .go:hover { background-color: #6aaeff; }
+.twRoot .tipBar { margin-top: 12px; border: 1px solid #3f3f3f; border-radius: 8px; }
+.twRoot .tipHead { display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 8px 10px; background-color: #1d1d1d; color: #e6e6e6; font-weight: 600; border-radius: 8px; }
+.twRoot .tipHead:hover { background-color: #2a2a2a; }
+.twRoot .note { background-color: #1d1d1d; padding: 12px; color: #a3a3a3; font-size: 11.5px; line-height: 1.6; border-top: 1px solid #3f3f3f; }
+.twRoot .note .lead { color: #e6e6e6; margin-bottom: 10px; }
+.twRoot .note .lead b { color: #4b9cff; font-weight: 600; }
+.twRoot .note .sec { padding-top: 9px; margin-top: 9px; border-top: 1px solid #333333; }
+.twRoot .note .h4 { display: block; margin-bottom: 3px; font-weight: 700; color: #e6e6e6; }
+.twRoot .twStatus.ok { color: #6fd3a0; }
+.twRoot .twStatus.err { color: #e2725b; white-space: normal; }
+.twRoot .twStatus { flex: 1; overflow: hidden; white-space: nowrap; color: #a3a3a3; }
+.twRoot .twStatus.err { white-space: normal; }
+.twRoot .tip { background-color: transparent; border: 1px solid #4a4a4a; border-radius: 6px; margin-bottom: 14px; }
+.twRoot .tail { position: absolute; left: 28%; bottom: -7px; width: 12px; height: 12px; background-color: #232323; border-right: 1px solid #4a4a4a; border-bottom: 1px solid #4a4a4a; transform: rotate(45deg); }
+.twRoot .tip .ic { margin-top: 1px; margin-right: 10px; min-width: 16px; }
+.twRoot .big { border-radius: 6px; border: 0; }
+.twRoot .big.primary { background-color: #5b5e63; }
+.twRoot .big.primary:hover { background-color: #6a6d72; }
+.twRoot .big b { color: #ffffff; }
+.twRoot .big:hover { border-color: transparent; }
+.twRoot .card { border-radius: 6px; border-color: #333333; }
+.twRoot .seg { background-color: #161616; border-radius: 5px; }
+.twRoot .sb { border-radius: 4px; }
+.twRoot .sb.on { background-color: #4a4a4a; }
+.twRoot .hb.pri { color: #ffffff; }
+.twRoot .go { color: #ffffff; }
+.twRoot .row.gap { margin-top: 6px; }
+.twRoot .seg.wrap { flex-wrap: wrap; }
+.twRoot .seg.wrap .sb { flex: none; width: 25%; }
+.twRoot .sb.off { opacity: .3; }
+.twRoot { padding-top: 4px; }
+.twRoot .twStatus { margin-top: 8px; padding: 6px 2px 0; border-top: 1px solid #333; color: #a3a3a3; font-size: 11px; }
+.twRoot .twStatus.ok { color: #6fd3a0; } .twRoot .twStatus.err { color: #e2725b; }
+.twRoot input, .twRoot textarea { background: #161616; border: 1px solid #3f3f3f; color: #e6e6e6; border-radius: 6px; padding: 5px 7px; font: inherit; }
+.twRoot .card { background: #1b1b1b; }
+.twRoot .seg.wrap .sb { font-size: 11px; white-space: nowrap; padding: 4px 2px; }
+
+/* edit mode: [수정] lit + settings card tagged */
+.twRoot .big.sel { opacity:1; background-color:#6c45a0 !important; box-shadow:0 0 0 1px #b98be0 inset; }
+.twRoot .big.sel small { color:#e6d4f7; }
+.twRoot.editing #tw-make { opacity:.45; }
+.twRoot.editing .bigs + .card { box-shadow:0 0 0 1px #b98be0 inset; position:relative; }
+.twRoot.editing .bigs + .card::before { content:"수정에 같이 적용돼요"; position:absolute; top:-9px; right:10px; font-size:10px; padding:1px 7px; border-radius:8px; background:#6c45a0; color:#fff; }
+.twRoot .editNote { font-size:11px; color:#cdb6ea; background:rgba(185,139,224,.1); border-radius:6px; padding:6px 8px; margin:-2px 0 8px; }
+.twRoot .editNote b { color:#fff; font-weight:600; }
