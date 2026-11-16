@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>0202Transition</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/typer.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="dot"></span>0202<b>Transition</b><i class="verTag">v.2</i></div>
+  <nav class="tabs">
+    <button class="tab on" data-tab="preset">프리셋</button>
+    <button class="tab" data-tab="fx">효과</button>
+    <button class="tab" data-tab="curve">커브</button>
+    <button class="tab" data-tab="comm">커뮤니티</button>
+    <button class="tab reload" id="reload" title="패널 새로고침 (수정사항 반영)">↻</button>
+  </nav>
+</header>
+
+<div id="presetTop">
+    <div class="card opts stickyOpts">
+     <div class="optGrid">
+      <div class="optCol">
+      <div class="row">
+        <label>강도</label>
+        <div class="seg" id="sizeStep">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="row">
+        <label>속도</label>
+        <div class="seg" id="speedStep">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="row">
+        <label></label><span class="hint" id="stepHint"></span>
+      </div>
+      </div>
+      <div class="optCol">
+      <div class="row">
+        <label>시작점</label>
+        <div class="seg" id="anchor">
+          <button data-v="start">클립 시작</button>
+          <button data-v="playhead" class="on">재생헤드</button>
+        </div>
+      </div>
+      <div class="row">
+        <label>모션블러</label>
+        <button class="toggle on" id="blur"><i></i></button>
+        <span class="hint">빠른 움직임에 블러</span>
+      </div>
+      <div class="row hidden" id="zaRow">
+        <label>기준점</label>
+        <button class="zaBtn" id="zaPick" title="선택한 클립의 효과 기준점을 화면에서 지정"><svg class="apIcon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 0.8V3.6M8 12.4V15.2M0.8 8H3.6M12.4 8H15.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>화면에서 지정</span></button><span class="hint" id="zaInfo"></span>
+      </div>
+      <div class="row hidden" id="rsRow">
+        <label>초기화</label>
+        <button class="zaBtn" id="fxReset" title="선택한 클립에 이 패널이 넣은 효과(변형·흐림·크롭 등)를 한 번에 지워요"><svg class="apIcon" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 1 0 1.7-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2.2 1.6v3.2h3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>효과 모두 지우기</span></button>
+      </div>
+      </div>
+     </div>
+    </div>
+</div>
+<main>
+  <!-- PRESET TAB -->
+  <section id="tab-preset" class="pane on">
+    <div id="presetList"></div>
+  </section>
+
+  <!-- FX TAB -->
+  <section id="tab-fx" class="pane">
+    <div class="fxIntro" id="fxIntro">
+      <button class="fxIntroX" id="fxIntroClose" title="닫기">✕</button>
+      <b>자주 쓰는 효과를 모아두고 프리미어 효과 패널 대신 쓰세요</b>
+      <span>① 아래 <em>효과 찾기</em>에서 ☆를 누르면 즐겨찾기에 추가</span>
+      <span>② 즐겨찾기를 클릭하면 선택한 클립에 바로 적용</span>
+      <span>③ 효과 값을 조절한 클립을 선택하고 <em>＋ 클립에서 값까지 저장</em>을 누르면 그 값 그대로 저장돼요</span>
+      <button class="fxIntroNever" id="fxIntroNever">다시 보지 않기</button>
+    </div>
+    <div class="card">
+      <div class="padHead"><span>즐겨찾기</span><small>클릭: 적용 · 우클릭: 메뉴</small></div>
+      <div class="favGrid" id="favGrid"></div>
+    </div>
+    <div class="card">
+      <div class="padHead"><span>효과 찾기</span><small>☆ 눌러 즐겨찾기</small></div>
+      <input id="fxSearch" class="search" placeholder="효과 이름 검색 (영문)">
+      <div class="fxList" id="fxList"><p class="note">효과 탭을 열면 목록을 불러와요</p></div>
+    </div>
+    <p class="note">오디오 효과(리버브 등)는 타임라인에서 오디오 클립을 선택하고 눌러주세요.</p>
+  </section>
+
+  <!-- CURVE TAB -->
+  <section id="tab-curve" class="pane">
+    <div class="card editor">
+      <div class="cvWrap"><canvas id="cv" width="640" height="440"></canvas><i id="phl"></i></div>
+      <div class="readout" id="readout">cubic-bezier(0.16, 1.00, 0.30, 1.00)</div>
+      <div class="preview"><div class="track"><span id="ball"></span></div></div>
+    </div>
+
+    <div class="card pad">
+      <div class="padHead"><span>커브</span><small>우클릭으로 내 커브 삭제</small></div>
+      <div class="padRow" id="curveRow"></div>
+      <div class="saveRow hidden" id="saveRow">
+        <input id="saveName" maxlength="16" placeholder="커브 이름">
+        <button id="saveOk">저장</button>
+        <button id="saveCancel" class="ghost">취소</button>
+      </div>
+    </div>
+
+    <div class="card opts">
+      <div class="row wrap">
+        <label>적용 대상</label>
+        <div class="chips" id="props">
+          <button data-v="pos" class="on">위치</button>
+          <button data-v="scale" class="on">비율</button>
+          <button data-v="rot" class="on">회전</button>
+          <button data-v="op" class="on">불투명도</button>
+          <button data-v="other">기타 효과</button>
+        </div>
+      </div>
+      <div class="row">
+        <label>키 간격</label>
+        <div class="seg" id="step">
+          <button data-v="1" class="on">1f</button>
+          <button data-v="2">2f</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="primary" id="applyCurve">선택한 클립에 커브 적용</button>
+    <button class="secondary" id="restoreCurve">원래 키프레임으로 복원</button>
+    <p class="note">선택한 클립의 키프레임 사이를 이 커브로 채워요. 프리셋으로 넣은 것도, 직접 넣은 효과도 다 돼요. 커브만 바꿔서 다시 누르면 바로 교체돼요.</p>
+  </section>
+
+  <section id="tab-comm" class="pane">
+    <div class="card pad comm">
+      <div class="commHead"><b>지금 같이 작업 중</b> <span id="commCount" class="commCount">● 1명</span> <span class="commBeta">베타</span></div>
+      <div id="commRoom" class="commRoom"></div>
+      <div class="commSay">
+        <div class="commEmo" id="commEmo"></div>
+        <div class="commLines" id="commLines"></div>
+      </div>
+      <p class="note">0202 Transition을 켜둔 사람들이 보여요 · 내 이름을 누르면 이름 바꾸기, 내 캐릭터를 누르면 색·표정·상태 바꾸기</p><p class="note" id="commNote"></p>
+    </div>
+  </section>
+</main>
+
+<div id="zaModal" class="zaModal hidden">
+  <div class="zaBox">
+    <div class="zaHead"><b>기준점 바꾸기</b><span>점을 드래그하거나 클릭하세요 · 선택한 클립의 효과가 이 지점을 중심으로 커지고 돌고 움직여요 · 효과를 넣기 전에 찍어도 돼요</span></div>
+    <div class="zaFrame" id="zaFrame"><img id="zaImg" alt=""><i class="zaGuide v" id="zaGv"></i><i class="zaGuide h" id="zaGh"></i><i id="zaMark"></i></div>
+    <p class="zaNote">📸 지금 화면을 잠깐 캡처해서 보여주는 거예요. 정상이에요 · 임시 파일이라 프로젝트나 영상엔 아무것도 남지 않아요</p>
+    <div class="zaFoot"><button id="zaCenter" class="ghost">가운데로</button><button id="zaDone" class="primary">완료</button></div>
+  </div>
+</div>
+<footer id="status">클립을 선택하고 버튼을 누르세요</footer>
+
+<script src="js/presets.js"></script>
+<script src="js/v2_pre.js"></script>
+<script src="js/main.js"></script>
+<script src="js/typer/xml.js"></script>
+<script src="js/typer/fx.js"></script>
+<script src="js/typer/pr_cep.js"></script>
+<script src="js/typer/typer_main.js"></script>
+<script src="js/typer/typer_mount.js"></script>
+<script src="js/v2_guard.js"></script>
+</body>
+</html>
