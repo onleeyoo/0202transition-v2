@@ -1,7 +1,7 @@
 {
- "v": "2.0.4",
+ "v": "2.0.5",
  "loader": 1,
- "built": "2026-11-17T10:20Z",
+ "built": "2026-11-17T10:39Z",
  "html": "index.html",
  "css": [
   "css/style.css",
@@ -26,7 +26,7 @@
  "len": {
   "js/presets.js": 33149,
   "js/v2_pre.js": 4854,
-  "js/main.js": 278508,
+  "js/main.js": 279598,
   "js/typer/xml.js": 9525,
   "js/typer/fx.js": 19375,
   "js/typer/pr_cep.js": 12672,
