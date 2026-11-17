@@ -526,7 +526,7 @@ var T0202 = (function () {
     /* reset: remove every effect type this panel adds (Transform, blur, crop, warp, colour ...) from the selected
        video clips. Motion / Opacity / Time Remapping / text and user effects like Lumetri are left alone.
        DOM components can't be removed, so match by display name on the QE item and remove there (last to first). */
-    var RESET_RX = /Geometry|Gaussian Blur|Fast Blur|Turbulent|Posterize|Wave Warp|Tint|Brightness|ProcAmp|Crop|Ramp|Alpha Adjust|Track Matte|Alpha Glow|Chromatic/i;
+    var RESET_RX = /Geometry|Gaussian Blur|Fast Blur|Turbulent|Posterize|Wave Warp|Tint|Brightness|ProcAmp|Crop|Ramp|Alpha Adjust|Track Matte|Alpha Glow|Chromatic|Basic 3D/i;
     function resetFx() {
         var seq = app.project.activeSequence;
         if (!seq) return "ERR|noseq";

@@ -621,6 +621,7 @@ body.locked main, body.locked #presetTop, body.locked footer { pointer-events:no
 .lgLinks { margin-top:10px; font-size:11px; color:#777; }
 .lgLinks span { cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
 .lgLinks span:hover { color:#ccc; }
+.lgLinks.lgOther { margin-top:6px; }
 
 .brand .verTag { font-style:normal; font-size:10px; font-weight:700; color:#fff; background:#6c45a0; border-radius:5px; padding:1px 5px; margin-left:5px; }
 
@@ -628,3 +629,139 @@ body.locked main, body.locked #presetTop, body.locked footer { pointer-events:no
 .brand .dot { width:18px !important; height:18px !important; border-radius:4px !important; background:url(../img/logo_64.png) center/contain no-repeat !important; box-shadow:none !important; }
 .beanSvg .rbar { animation:rbar 1.6s ease-in-out infinite alternate; transform-box:fill-box; transform-origin:left center; }
 @keyframes rbar { from { transform:scaleX(.25); } to { transform:scaleX(1.55); } }
+
+/* community: operator's floating star above the bean */
+.beanCell .beanSvg { overflow: visible; }
+.beanCell .opStar { animation: opStarFloat 2.4s ease-in-out infinite; transform-origin: 30px -3px; filter: drop-shadow(0 0 3px rgba(255,211,107,.7)); }
+@keyframes opStarFloat { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-2.5px) rotate(8deg); } }
+.beanCell .opStar { cursor: default; }
+.beanCell .opStarP { transform-box: fill-box; transform-origin: center; transition: transform .22s cubic-bezier(.3,1.6,.5,1), opacity .15s; }
+.beanCell.opHover .opStarP { transform: scale(0); opacity: 0; }
+.commRoom .beanCell .bubble.opTip { max-width: none; background: #ffd36b; color: #3a2a00; font-weight: 700; }
+.beanCell.opHover .bubble.opTip { opacity: 1; transform: translate(-50%,0) scale(1); transition: opacity .2s, transform .28s cubic-bezier(.3,1.7,.5,1); }
+.commRoom .beanCell .bubble.opTip { white-space: nowrap; text-align: center; line-height: 1.35; padding: 4px 10px; top: -40px; }
+.commRoom .beanCell .bubble.opTip { top: -24px; }
+.comm .note { word-break: keep-all; }
+.acctPick .tab.reload { margin-right: 6px; padding: 4px 8px; box-shadow: none; border-bottom: 0; font-size: 15px; }
+
+/* community sky: night · dawn · day · sunset · dusk (+ snow), follows Seoul sunrise/sunset */
+.commRoom { background: #0b0d2a !important; }
+.commRoom::before { z-index: 1; }
+.commRoom .beanCell { z-index: 2; }
+.commRoom .beanCell.me { z-index: 3; }
+.commRoom .beanCell b { text-shadow: 0 1px 3px rgba(0,0,0,.65); }
+.commRoom .beanCell small { color: rgba(255,255,255,.72); text-shadow: 0 1px 3px rgba(0,0,0,.65); }
+.commSky { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; transition: background 2s; }
+.commSky > div { position:absolute; transition: opacity 2s; }
+.commSky.sky-night  { background: linear-gradient(180deg,#080a24 0%,#121842 62%,#1c1739 100%); }
+.commSky.sky-dawn   { background: linear-gradient(180deg,#1b2150 0%,#4f4a8c 42%,#e2879a 78%,#f8c48a 100%); }
+.commSky.sky-day    { background: linear-gradient(180deg,#2a63b0 0%,#4889d0 55%,#86bde9 100%); }
+.commSky.sky-sunset { background: linear-gradient(180deg,#26285e 0%,#7c4590 40%,#e46a5e 76%,#ffb066 100%); }
+.commSky.sky-dusk   { background: linear-gradient(180deg,#0f1336 0%,#352a63 58%,#6e4377 100%); }
+.commSky.snowing.sky-day { background: linear-gradient(180deg,#566e8c 0%,#7e93ab 55%,#aab8c8 100%); }
+.commSky.snowing.sky-night, .commSky.snowing.sky-dusk { background: linear-gradient(180deg,#151a33 0%,#242b48 62%,#2c2a44 100%); }
+/* stars */
+.skyStars { inset:0; opacity:0; }
+.skyStars i { position:absolute; border-radius:50%; background:#fff; animation: skyTw 4s ease-in-out infinite; }
+@keyframes skyTw { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+.sky-night .skyStars { opacity:1; } .sky-dusk .skyStars { opacity:.55; } .sky-dawn .skyStars { opacity:.25; }
+.snowing .skyStars { opacity:0 !important; }
+/* crescent moon (night only) */
+.skyMoon { right:9%; top:7%; width:38px; height:38px; border-radius:50%; box-shadow: -9px 7px 0 0 #ffe08a; transform: rotate(-12deg); filter: drop-shadow(0 0 10px rgba(255,224,138,.55)); opacity:0; }
+.sky-night .skyMoon { opacity:1; } .sky-dusk .skyMoon { opacity:.6; }
+.snowing .skyMoon { opacity:.25 !important; }
+/* sun: position set from the time, colour by period */
+.skySun { width:46px; height:46px; margin:-23px 0 0 -23px; border-radius:50%; opacity:0;
+  background: radial-gradient(circle,#fff6c9 0%,#ffd75e 55%,#ffb93b 100%); box-shadow: 0 0 28px 10px rgba(255,214,94,.45); transition: opacity 2s, left 60s linear, top 60s linear; }
+.sky-day .skySun { opacity:1; }
+.sky-dawn .skySun, .sky-sunset .skySun { opacity:1; background: radial-gradient(circle,#ffe2a8 0%,#ff9a52 60%,#ff6f3c 100%); box-shadow: 0 0 40px 18px rgba(255,140,80,.45); }
+.snowing .skySun { opacity:.18 !important; }
+/* horizon glow for sunrise / sunset */
+.skyGlow { left:-10%; right:-10%; bottom:-30%; height:60%; border-radius:50%; opacity:0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(255,170,110,.55), rgba(255,120,90,0) 70%); }
+.sky-dawn .skyGlow, .sky-sunset .skyGlow { opacity:1; }
+/* soft clouds by day */
+.skyCloud { height:16px; border-radius:20px; background: rgba(255,255,255,.55); filter: blur(1px); opacity:0; animation: skyDrift 70s linear infinite; }
+.skyCloud::before, .skyCloud::after { content:""; position:absolute; background:inherit; border-radius:50%; }
+.skyCloud::before { width:26px; height:26px; left:12px; top:-12px; } .skyCloud::after { width:18px; height:18px; left:34px; top:-7px; }
+.skyCloud.c1 { width:70px; top:16%; left:12%; } .skyCloud.c2 { width:54px; top:30%; left:62%; animation-duration: 95s; animation-delay:-30s; }
+@keyframes skyDrift { from { transform: translateX(-30px); } to { transform: translateX(30px); } }
+.sky-day .skyCloud { opacity:1; animation-direction: alternate; }
+.snowing.sky-day .skyCloud { opacity:.8; background: rgba(230,236,244,.75); }
+/* snow */
+.skySnow { inset:0; opacity:0; }
+.snowing .skySnow { opacity:1; }
+.skySnow i { position:absolute; top:-6px; border-radius:50%; background:#fff; opacity:.85; animation: skyFall linear infinite; }
+@keyframes skyFall { from { transform: translate(0,-10px); } 50% { transform: translate(8px,50vh); } to { transform: translate(-4px,110vh); } }
+.commSky .skySun { transition: opacity 2s; }
+.snowing .skyMoon { opacity:0 !important; }
+.snowing.sky-night .skyMoon { opacity:.3 !important; }
+
+/* sky only as a band at the top; the room below is a cosy floor */
+.commRoom { background: linear-gradient(180deg,#1b1730 0%,#15121f 55%,#100e17 100%) !important; }
+.commRoom::before { display: none; }
+.commSky { bottom: auto; height: 90px; -webkit-mask-image: linear-gradient(180deg,#000 62%,transparent 100%); mask-image: linear-gradient(180deg,#000 62%,transparent 100%); }
+.skyMoon { top: 14%; width: 32px; height: 32px; }
+.sky-day .skySun, .commSky .skySun { width: 38px; height: 38px; margin: -19px 0 0 -19px; }
+.skyCloud.c1 { top: 28%; } .skyCloud.c2 { top: 50%; }
+.skyGlow { bottom: -45%; height: 90%; }
+.skySnow i { animation-name: skyFallBand; }
+@keyframes skyFallBand { 0% { top: -6px; transform: translateX(0); } 50% { transform: translateX(7px); } 100% { top: 100%; transform: translateX(-3px); } }
+/* clock in the sky band */
+.skyClock { left: 14px; top: 12px; z-index: 1; display: flex; flex-direction: column; line-height: 1; }
+.skyWhen { font-size: 11px; font-weight: 700; color: rgba(225,210,255,.85); letter-spacing: .02em; text-shadow: 0 1px 3px rgba(0,0,0,.45); }
+.skyTime { margin-top: 5px; font-size: 40px; font-weight: 800; color: #fff; letter-spacing: -.01em; font-variant-numeric: tabular-nums; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.sky-day .skyWhen { color: rgba(255,255,255,.9); }
+.skyCloud.c1 { left: 46%; } .skyCloud.c2 { left: 64%; top: 58%; }
+.commRoom .beanCell small.upT { display:block; margin-top:1px; font-size:9.5px; color: rgba(214,196,255,.75); }
+
+/* clock v2: period chip + date, big time with a softly blinking colon */
+.skyClock { left: 16px; top: 13px; gap: 0; }
+.skyRow { display: flex; align-items: center; gap: 7px; }
+.skyChip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px 2px 6px; border-radius: 999px; font-size: 10.5px; font-weight: 800; letter-spacing: .02em;
+  color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.2); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.skyChip::before { content: "☾"; font-size: 10px; color: #ffe08a; }
+.sky-day .skyChip::before { content: "☀"; color: #ffd75e; }
+.sky-dawn .skyChip::before, .sky-sunset .skyChip::before { content: "◐"; color: #ffb27a; }
+.skyDate { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.78); text-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.skyTime { display: flex; align-items: baseline; margin-top: 4px; font-size: 46px; line-height: .98; font-weight: 800; letter-spacing: -1.5px; color: #fff;
+  font-variant-numeric: tabular-nums; text-shadow: 0 2px 14px rgba(20,10,60,.35); }
+.skyTime .colon { margin: 0 2px; transform: translateY(-3px); font-weight: 700; opacity: .9; animation: skyColon 2s steps(1) infinite; }
+@keyframes skyColon { 50% { opacity: .25; } }
+.sky-day .skyChip { background: rgba(255,255,255,.22); }
+
+/* no fade between sky and floor: clean edge, flat floor */
+.commRoom { background: #16131f !important; }
+.commSky { -webkit-mask-image: none; mask-image: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+.skyCloud.c1 { left: 52%; top: 24%; } .skyCloud.c2 { left: 60%; top: 62%; }
+
+/* floor: fine geometric grid (lines every 22px, brighter dot at each crossing) */
+.commRoom {
+  background-color: #16131f !important;
+  background-image:
+    radial-gradient(circle, rgba(200,170,255,.16) 1px, transparent 1.4px),
+    linear-gradient(rgba(185,139,224,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185,139,224,.06) 1px, transparent 1px) !important;
+  background-size: 22px 22px, 22px 22px, 22px 22px !important;
+  background-position: -11px -11px, 0 0, 0 0 !important;
+}
+/* soft 3D beans: a gentle drop shadow under each body */
+.commRoom .beanSvg .beanBody { filter: drop-shadow(0 3px 4px rgba(10,5,30,.35)); }
+
+/* performance: no live CSS filters on beans; bob the whole SVG on the GPU instead of repainting inside it */
+.commRoom .beanSvg .beanBody { filter: none !important; animation: none; }
+.commRoom .beanSvg { animation: beanBobLite 1.8s ease-in-out infinite; animation-delay: inherit; will-change: transform; }
+@keyframes beanBobLite { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+.commRoom .beanCell.me .beanSvg { filter: none !important; }
+.commRoom .beanCell.me::before { content:""; position:absolute; left:50%; top:4px; width:120px; height:120px; margin-left:-60px; border-radius:50%;
+  background: radial-gradient(circle, rgba(185,139,224,.32) 0%, rgba(185,139,224,0) 65%); pointer-events:none; z-index:-1; }
+.beanCell .opStar { filter: none !important; }
+.beanSvg .eyes { animation-timing-function: steps(1, end); }
+.commRoom.paused *, .commRoom.paused *::before, .commRoom.paused *::after { animation-play-state: paused !important; }
+.beanCell.opHover .opStar circle { opacity: 0; }
+/* snow falls with transform only (no layout every frame) */
+.skySnow i { top: -6px !important; animation-name: skyFallGpu; will-change: transform; }
+@keyframes skyFallGpu { 0% { transform: translate(0,0); } 50% { transform: translate(7px, calc(var(--skyH, 120px) / 2)); } 100% { transform: translate(-3px, calc(var(--skyH, 120px) + 8px)); } }
+/* header mark: circle + play shape (same as the thumbnail) */
+.brand .dot { width:30px !important; height:18px !important; border-radius:0 !important; background:url(../img/logo_mark.svg) center/contain no-repeat !important; box-shadow:none !important; margin-right:2px; }
+.brand .dot { width:29px !important; }

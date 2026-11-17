@@ -1,7 +1,7 @@
 {
- "v": "2.0.0",
+ "v": "2.0.2",
  "loader": 1,
- "built": "2026-11-16T07:15Z",
+ "built": "2026-11-17T09:01Z",
  "html": "index.html",
  "css": [
   "css/style.css",
@@ -24,19 +24,19 @@
   "typer": "jsx/typer.jsx"
  },
  "len": {
-  "js/presets.js": 33376,
+  "js/presets.js": 33073,
   "js/v2_pre.js": 4778,
-  "js/main.js": 239429,
+  "js/main.js": 278405,
   "js/typer/xml.js": 9449,
   "js/typer/fx.js": 19299,
-  "js/typer/pr_cep.js": 12306,
-  "js/typer/typer_main.js": 57963,
-  "js/typer/typer_mount.js": 10606,
-  "js/v2_guard.js": 14977,
-  "css/style.css": 44316,
-  "css/typer.css": 9655,
-  "index.html": 7187,
-  "jsx/host_full.jsx": 88286,
+  "js/typer/pr_cep.js": 12596,
+  "js/typer/typer_main.js": 62939,
+  "js/typer/typer_mount.js": 10240,
+  "js/v2_guard.js": 27623,
+  "css/style.css": 55237,
+  "css/typer.css": 13050,
+  "index.html": 7188,
+  "jsx/host_full.jsx": 88295,
   "jsx/host.jsx": 87,
   "jsx/typer.jsx": 11766
  }
