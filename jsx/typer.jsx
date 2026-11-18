@@ -28,7 +28,7 @@ var T0202TWX = (function () {
         } catch (e) {}
         return null;
     }
-    function waitFile(f) { for (var w = 0; w < 50 && !f.exists; w++) $.sleep(100); return f.exists; }
+    function waitFile(f) { for (var w = 0; w < 300 && !f.exists; w++) $.sleep(100); return f.exists; }   /* long sequences can take >5s to export */
     function enc(s) { return encodeURIComponent(String(s)); }
 
     /* what is selected: none | text | typer | other  (cheap, polled by the panel) */
