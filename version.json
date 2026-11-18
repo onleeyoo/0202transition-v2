@@ -1,7 +1,7 @@
 {
- "v": "2.0.8",
+ "v": "2.0.9",
  "loader": 1,
- "built": "2026-11-18T01:33Z",
+ "built": "2026-11-18T01:39Z",
  "html": "index.html",
  "css": [
   "css/style.css",
@@ -30,7 +30,7 @@
   "js/typer/xml.js": 9449,
   "js/typer/fx.js": 19299,
   "js/typer/pr_cep.js": 12596,
-  "js/typer/typer_main.js": 62939,
+  "js/typer/typer_main.js": 63655,
   "js/typer/typer_mount.js": 10240,
   "js/v2_guard.js": 28405,
   "css/style.css": 55237,
