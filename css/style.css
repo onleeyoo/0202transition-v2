@@ -765,3 +765,17 @@ body.locked main, body.locked #presetTop, body.locked footer { pointer-events:no
 /* header mark: circle + play shape (same as the thumbnail) */
 .brand .dot { width:30px !important; height:18px !important; border-radius:0 !important; background:url(../img/logo_mark.svg) center/contain no-repeat !important; box-shadow:none !important; margin-right:2px; }
 .brand .dot { width:29px !important; }
+/* black-panel fix (2026-11-19): Premiere's embedded browser can stop painting when many GPU layers are alive.
+   Keep the community room flat: no backdrop/blur filters, no permanent GPU layers. */
+.skyChip { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(255,255,255,.18); }
+.skyCloud { filter: none !important; }
+.commRoom .beanSvg, .skySnow i { will-change: auto !important; }
+/* light mode for the room (2026-11-19): with GPU compositing off every animation frame is drawn on the CPU,
+   so step the always-on animations — the eye sees the same thing, the browser repaints a few times a second instead of 60 */
+.commRoom .beanSvg { animation-timing-function: steps(4, end) !important; }
+.beanSvg .hand { animation-timing-function: steps(3, end) !important; }
+.beanSvg .rbar { animation-timing-function: steps(6, end) !important; }
+.beanCell .opStar { animation-timing-function: steps(8, end) !important; }
+.skyStars i { animation-timing-function: steps(6, end) !important; }
+.skyCloud { animation-timing-function: steps(90, end) !important; }
+.skySnow i { animation-timing-function: steps(60, end) !important; }
