@@ -491,8 +491,19 @@ var T0202 = (function () {
     /* frame export that also works on Windows: native path separator, and don't trust the return value
        (Windows Premiere returns nothing even when the PNG is written) - wait for the file instead. */
     var SEP = ($.os && /windows/i.test($.os)) ? "\\" : "/";
+    /* Windows: a temp path with a Korean user name or an 8.3 short name ("~") is where Premiere's frame export
+       silently writes nothing -> use C:\\Users\\Public instead */
+    function safeBase() {
+        var t = Folder.temp.fsName;
+        if (SEP === "\\" && /[^\x00-\x7F]|~/.test(t)) {
+            var pub = $.getenv("PUBLIC") || "C:\\Users\\Public";
+            var pf = new Folder(pub);
+            if (pf.exists && !/[^\x00-\x7F]/.test(pf.fsName)) return pf.fsName;
+        }
+        return t;
+    }
     function tmpDir() {
-        var dir = new Folder(Folder.temp.fsName + SEP + "0202Transition");
+        var dir = new Folder(safeBase() + SEP + "0202Transition");
         if (!dir.exists) dir.create();
         return dir;
     }
@@ -1334,6 +1345,7 @@ var T0202 = (function () {
             o.push("fx(" + list.length + "): " + hit.join(" / "));
             var t1 = null; try { t1 = qe.project.getVideoEffectByName("Transform"); } catch (e2) {}
             o.push("byName(Transform) " + (t1 ? "ok" : "null"));
+            try { o.push("tmp " + Folder.temp.fsName + " -> " + tmpDir().fsName); } catch (eT) {}
         } catch (e3) { o.push("qe err " + e3); }
         try {
             var seq = app.project.activeSequence;

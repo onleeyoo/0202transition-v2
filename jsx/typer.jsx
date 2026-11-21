@@ -16,7 +16,17 @@ var T0202TWX = (function () {
         }
         return out;
     }
-    function tmpDir() { var d = new Folder(Folder.temp.fsName + SEP + "0202Typer"); if (!d.exists) d.create(); return d; }
+    /* Windows: Korean user name / 8.3 short temp path -> XML export writes nothing there; use C:\\Users\\Public */
+    function safeBase() {
+        var t = Folder.temp.fsName;
+        if (SEP === "\\" && /[^\x00-\x7F]|~/.test(t)) {
+            var pub = $.getenv("PUBLIC") || "C:\\Users\\Public";
+            var pf = new Folder(pub);
+            if (pf.exists && !/[^\x00-\x7F]/.test(pf.fsName)) return pf.fsName;
+        }
+        return t;
+    }
+    function tmpDir() { var d = new Folder(safeBase() + SEP + "0202Typer"); if (!d.exists) d.create(); return d; }
     function tmpPath(name) { return tmpDir().fsName + SEP + name; }
     function textCount(clip) { var n = 0; for (var i = 0; i < clip.components.numItems; i++) if (clip.components[i].matchName === "AE.ADBE Text") n++; return n; }
     function isText(clip) { return textCount(clip) > 0; }
