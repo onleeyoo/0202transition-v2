@@ -77,6 +77,52 @@ var T0202TWX = (function () {
         }
         return -1;
     }
+    /* the typer pieces inside the nest are built at Motion 100% / centre (so an old typer clip can be the template too).
+       Whatever Motion the user had on the source clip (smaller size, moved, rotated) is put back on the new nest clip.
+       Motion params: 0 Position, 1 Scale, 2 Scale Width, 3 Uniform Scale, 4 Rotation, 5 Anchor Point */
+    function motionOf(clip) {
+        try { for (var i = 0; i < clip.components.numItems; i++) if (clip.components[i].matchName === "AE.ADBE Motion") return clip.components[i].properties; } catch (e) {}
+        return null;
+    }
+    function clipAt(track, st) {
+        for (var c = 0; c < track.clips.numItems; c++) { var k = track.clips[c]; if (Number(k.start.ticks) <= st && Number(k.end.ticks) > st) return k; }
+        return null;
+    }
+    function readMotion(clip) {
+        var pr = motionOf(clip), out = [];
+        if (!pr) return null;
+        var inT = 0; try { inT = Number(clip.inPoint.ticks); } catch (e0) {}
+        for (var i = 0; i <= 5 && i < pr.numItems; i++) {
+            var p = pr[i], e = { v: null, keys: null };
+            try {
+                if (p.isTimeVarying && p.isTimeVarying()) {
+                    var ks = p.getKeys() || [], arr = [];
+                    for (var k = 0; k < ks.length; k++) arr.push([Number(ks[k].ticks) - inT, p.getValueAtKey(ks[k])]);
+                    e.keys = arr;
+                } else e.v = p.getValue();
+            } catch (e1) {}
+            out.push(e);
+        }
+        return out;
+    }
+    function writeMotion(clip, m) {
+        var pr = motionOf(clip); if (!pr || !m) return 0;
+        var inT = 0; try { inT = Number(clip.inPoint.ticks); } catch (e0) {}
+        var n = 0;
+        /* uniform-scale flag first, so Scale / Scale Width land on the right fields */
+        var order = [3, 0, 1, 2, 4, 5];
+        for (var q = 0; q < order.length; q++) {
+            var i = order[q], e = m[i], p = pr[i]; if (!e || !p) continue;
+            try {
+                if (e.keys && e.keys.length) {
+                    try { p.setTimeVarying(true); } catch (eT) {}
+                    for (var k = 0; k < e.keys.length; k++) { var t = new Time(); t.ticks = String(e.keys[k][0] + inT); p.addKey(t); p.setValueAtKey(t, e.keys[k][1], 1); }
+                    n++;
+                } else if (e.v !== null && e.v !== undefined) { p.setValue(e.v, 1); n++; }
+            } catch (e2) {}
+        }
+        return n;
+    }
     /* o: { path, start(ticks), frames, track, mode: "above" | "replace" | "free", hideSrc } */
     function place(o) {
         var seq = app.project.activeSequence;
@@ -117,8 +163,11 @@ var T0202TWX = (function () {
                 }
             } catch (eP) {}
         }
+        var srcClip = null, srcMotion = null;
+        try { srcClip = clipAt(seq.videoTracks[tr], st); if (srcClip) srcMotion = readMotion(srcClip); } catch (eM) {}
         var tm = new Time(); tm.ticks = String(st);
         seq.videoTracks[tIdx].overwriteClip(nseq.projectItem, tm);
+        try { var nc = clipAt(seq.videoTracks[tIdx], st); if (nc && srcMotion) writeMotion(nc, srcMotion); } catch (eW) {}
         var off = 0;
         if (o.hideSrc && o.mode === "above") {
             var rt = seq.videoTracks[tr];

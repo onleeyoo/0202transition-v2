@@ -1,7 +1,7 @@
 {
- "v": "2.0.19",
+ "v": "2.0.20",
  "loader": 1,
- "built": "2026-11-21T18:51Z",
+ "built": "2026-11-21T19:34Z",
  "html": "index.html",
  "css": [
   "css/style.css",
@@ -38,6 +38,6 @@
   "index.html": 7155,
   "jsx/host_full.jsx": 88899,
   "jsx/host.jsx": 87,
-  "jsx/typer.jsx": 12256
+  "jsx/typer.jsx": 14975
  }
 }
